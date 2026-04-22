@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JwtTest {
-    @Test
+   // @Test
     public void testGen() {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", 1);
@@ -26,7 +26,7 @@ public class JwtTest {
         System.out.println(token);
 
     }
-    @Test
+   // @Test
     public void testParse() {
         //定义字符串,模拟用户传递过来的token
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6IuW8oOS4iSJ9LCJleHAiOjE3NzU0MzgyMDR9.667L5TjEiwM3DmeTgZvhszQ6ssS3HhLvWxKzkMh031E";

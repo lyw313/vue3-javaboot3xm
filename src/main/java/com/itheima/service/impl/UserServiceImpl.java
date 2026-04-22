@@ -4,8 +4,12 @@ import com.itheima.mapper.UserMapper;
 import com.itheima.pojo.User;
 import com.itheima.service.UserService;
 import com.itheima.utils.Md5Util;
+import com.itheima.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,12 +21,34 @@ public class UserServiceImpl implements UserService {
         return u;
     }
 
+
     @Override
     public void register(String username, String password) {
         //加密
         String md5String = Md5Util.getMD5String(password);
         userMapper.add(username,md5String);
 
+    }
+
+    @Override
+    public void update(User user) {
+        user.setUpdateTime(LocalDateTime.now());
+        userMapper.update(user);
+
+    }
+
+    @Override
+    public void updateAvater(String avatarUrl) {
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        userMapper.updateAvater(avatarUrl,id);
+    }
+
+    @Override
+    public void updatePwd(String md5String) {
+        Map<String,Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        userMapper.updatePwd(md5String,id);
     }
 }
 
